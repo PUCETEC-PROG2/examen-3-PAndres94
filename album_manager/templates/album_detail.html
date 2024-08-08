@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+
+{% block title %}Lista de Artistas{% endblock title %}
+
+{% block content %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'index' %}">INICIO</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'album_list' %}">LISTA DE ALBUMES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-secondary" href="{% url 'album_update' album.pk %}">EDITAR ÁLBUM</a>
+                    <a class="btn btn-secondary" href="{% url 'album_delete' album.pk %}">DESHACER ÁLBUM</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main class="container my-4">
+        <h2>{{ album.titulo }}</h2>
+        {% if album.portada %}
+            <img src="{{ album.portada.url }}" alt="{{ album.titulo }}" class="img-fluid mb-3" style="max-width: 100%; height: auto;">
+        {% else %}
+            <p>NO HAY PORTADA DISPONIBLE</p>
+        {% endif %}
+        <p><strong>AÑO DE LANZAMIENTO:</strong> {{ album.año_lanzamiento }}</p>
+        <p><strong>GÉNERO:</strong> {{ album.genero }}</p>
+        <p><strong>ARTISTA:</strong> {{ album.artista.nombre }}</p>
+    </main>
+    {% endblock content %}
+  
